@@ -1,0 +1,228 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API com Solid",
+        "description": "API feita usando metodos do solid",
+        "version": "1.0.0",
+        "contact": {
+            "email": "albertivini99@gmail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["User"],
+                "summary": "Create a User",
+                "description": "Create a new non admin user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Nome da pessoa (Vinicius Alberti)",
+                                    "email": "email da pessoa (vinicius@email.com)"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "E-mail já cadastrado."
+                    }
+                }
+            },
+            "get": {
+                "tags": ["User"],
+                "summary": "List all users",
+                "description": "List all users to admin user",
+                "parameters": {
+                    "name": "user_id",
+                    "in": "header",
+                    "description": "list all users",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "email": {
+                                                "type": "string"
+                                            },
+                                            "admin": {
+                                                "type": "boolean" 
+                                            },
+                                            "created_at": {
+                                                "type": "string"
+                                            },
+                                            "updated_at": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "example": [
+                                                {
+                                                    "id": "uuid",
+                                                    "name": "Vinicius2",
+                                                    "email": "vinicius@email.com",
+                                                    "admin": false,
+                                                    "created_at": "2021-09-06 16:15:00",
+                                                    "updated_at": "2021-09-06 16:15:00"
+                                                },
+                                                {
+                                                    "id": "uuid",
+                                                    "name": "Vinicius2",
+                                                    "email": "vinicius2@email.com",
+                                                    "admin": false,
+                                                    "created_at": "2021-09-06 16:15:00",
+                                                    "updated_at": "2021-09-06 16:15:00"
+                                                }
+                                            ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Usuário não é um administrador"
+                    }
+                }
+            }
+        },
+        "/users/{user_id}" : {
+            "get": {
+                "tags": ["User"],
+                "summary": "Show user by id",
+                "description": "Show user by id",
+                "parameters": {
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "Show user by id",
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "boolean" 
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "id": "uuid",
+                                        "name": "Vinicius",
+                                        "email": "vinicius@email.com",
+                                        "admin": false,
+                                        "created_at": "2021-09-06 16:15:00",
+                                        "updated_at": "2021-09-06 16:15:00"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado."
+                    }
+                }
+            }
+        },
+        "/users/{user_id}/admin": {
+            "patch": {
+                "tags": ["User"],
+                "summary": "turn user to admin",
+                "description": "turn usert to admin user",
+                "parameters": {
+                    "name": "user_id",
+                    "in": "path",
+                    "description": "turn user to admin",
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "admin": {
+                                            "type": "boolean" 
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "example": {
+                                        "id": "uuid",
+                                        "name": "Vinicius",
+                                        "email": "vinicius@email.com",
+                                        "admin": false,
+                                        "created_at": "2021-09-06 16:15:00",
+                                        "updated_at": "2021-09-06 16:15:00"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado."
+                    }
+                }
+            }
+        }
+    }
+}
